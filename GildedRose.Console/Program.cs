@@ -7,6 +7,7 @@ namespace GildedRose.Console
         IList<Item> Items;
         static void Main(string[] args)
         {
+            System.Console.WriteLine("hello world");
             System.Console.WriteLine("OMGHAI!");
 
             var app = new Program()
