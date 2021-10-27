@@ -89,5 +89,26 @@ namespace GildedRose.Tests
             Assert.Equal(expectedSellIn, _program.Items[4].SellIn);
             Assert.Equal(expectedQUality, _program.Items[4].Quality);
         }
+        
+        
+        [Theory]
+        [InlineData(5, 0, 3, 6)]
+        [InlineData(5, 1, 2, 4)]
+        [InlineData(5, 2, 1, 2)]
+        [InlineData(5, 3, 0, 0)]
+        [InlineData(5, 100, -97, 0)]
+        public void Conjured(int itemIndex, int iterations, int expectedSellIn,
+            int expectedQuality)
+        {
+            //Act
+            for (int i = 0; i < iterations; i++)
+            {
+                _program.UpdateQuality();
+            }
+
+            //Assert
+            Assert.Equal(expectedSellIn, _program.Items[itemIndex].SellIn);
+            Assert.Equal(expectedQuality, _program.Items[itemIndex].Quality);
+        }
     }
 }
