@@ -34,7 +34,91 @@ namespace GildedRose.Console
             System.Console.ReadKey();
         }
 
+        public void UpdateNormal(int i)
+        {
+            Items[i].SellIn--;
+            
+            if (Items[i].SellIn < 0)
+            {
+                Items[i].Quality -= 2;
+            } else 
+            {
+                Items[i].Quality--;
+            }
+            
+            if(Items[i].Quality < 0){
+                 Items[i].Quality = 0;
+            }
+                                                    
+           /* if (Items[i].SellIn < 0)
+            {
+                if(Items[i].Quality > 1)
+                {
+                    Items[i].Quality -= 2;
+                } else if(Items[i].Quality == 1)
+                {
+                    Items[i].Quality--;
+                }
+            } else 
+            {
+                if(Items[i].Quality > 0)
+                {
+                    Items[i].Quality--;
+                }
+            }*/
+            
+            
+        }
+        
+        public void UpdateBrie(int i)
+        {
+            Items[i].SellIn--;
+            if (Items[i].Quality < 50)
+            {
+                Items[i].Quality++;
+            }
+        }
+        
+        public void UpdateBackstagePasses(int i)
+        { 
+            if(Items[i].SellIn < 0)
+            {
+                Items[i].Quality = 0;
+            } else if(Items[i].SellIn < 6)
+            {
+                Items[i].Quality += 3;
+            } else if(Items[i].SellIn < 11)
+            {
+                Items[i].Quality +=2;
+            }
+            else
+            {
+                Items[i].Quality++;
+            }
+           
+            Items[i].SellIn--;
+           
+            if (Items[i].Quality>50){
+                Items[i].Quality=50;
+            }
+        }
+        
+        public void UpdateSulfuras(int i)
+        {
+            //do nothing
+        }
+        
         public void UpdateQuality()
+        {
+            UpdateNormal(0);
+            UpdateNormal(2);
+            UpdateNormal(5);
+            UpdateBrie(1);
+            UpdateBackstagePasses(4);
+            UpdateSulfuras(3);
+        }
+        
+        public void OldUpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
             {
@@ -44,6 +128,8 @@ namespace GildedRose.Console
                     {
                         if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                         {
+                            // we've hit a normal item
+                            
                             Items[i].Quality = Items[i].Quality - 1;
                         }
                     }
@@ -77,6 +163,7 @@ namespace GildedRose.Console
 
                 if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                 {
+                    // all items except the sulfuras hammer, here they are decrased in sellin date
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
